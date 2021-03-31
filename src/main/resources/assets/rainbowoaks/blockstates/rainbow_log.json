@@ -1,0 +1,17 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "axis=x": {
+      "model": "rainbowoaks:block/rainbow_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "rainbowoaks:block/rainbow_log"
+    },
+    "axis=z": {
+      "model": "rainbowoaks:block/rainbow_log_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "rainbowoaks:block/top",
+    "side": "rainbowoaks:block/side"
+  }
+}
