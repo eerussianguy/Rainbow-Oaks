@@ -2,5 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "block.rainbowoaks.rainbow_log": "Rainbow Log",
   "block.rainbowoaks.rainbow_leaves": "Rainbow Leaves",
-  "block.rainbowoaks.rainbow_sapling": "Rainbow Sapling"
+  "block.rainbowoaks.rainbow_sapling": "Rainbow Sapling",
+  "rainbowoaks.config.server.rarity": "Resource Locations of biomes they spawn in. Separate with commas.",
+  "rainbowoaks.config.server.extraAttempts": "Extra trees that spawn in a patch"
 }

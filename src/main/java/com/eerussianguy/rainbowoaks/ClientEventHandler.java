@@ -7,7 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.IBlockDisplayReader;
@@ -39,7 +38,43 @@ public class ClientEventHandler
         @Override
         public int getColor(@Nonnull ItemStack stack, int tintIndex)
         {
-            return 0;
+            int red = 0;
+            int green = 0;
+            int blue = 0;
+
+            for (int i = -1; i <= 1; ++i)
+            {
+                for (int j = -1; j <= 1; ++j)
+                {
+                    int averageColor = FoliageColors.getDefaultColor();
+                    red += (averageColor & 16711680) >> 16;
+                    green += (averageColor & 65280) >> 8;
+                    blue += averageColor & 255;
+                }
+            }
+
+            red = stack.getCount() * 64;
+            if ((red & 256) != 0)
+            {
+                red = 255 - (red & 255);
+            }
+            red &= 255;
+
+            blue = stack.getCount() * 32;
+            if ((blue & 256) != 0)
+            {
+                blue = 255 - (blue & 255);
+            }
+            blue ^= 255;
+
+            green = stack.getCount();
+            if ((green & 256) != 0)
+            {
+                green = 255 - (green & 255);
+            }
+            green &= 255;
+
+            return red << 16 | blue << 8 | green;
         }
     }
 
