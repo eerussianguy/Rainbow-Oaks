@@ -3,8 +3,8 @@ package com.eerussianguy.rainbowoaks;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +24,7 @@ public class ForgeEventHandler
             {
                 if (event.getName().compareNamespaced(res) == 0)
                 {
-                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> ROConfiguredFeatures.RAINBOW_TREES);
+                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(() -> ROConfiguredFeatures.RAINBOW_TREES);
                 }
             }
         }

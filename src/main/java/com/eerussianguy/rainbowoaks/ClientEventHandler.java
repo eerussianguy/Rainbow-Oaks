@@ -3,14 +3,14 @@ package com.eerussianguy.rainbowoaks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.FoliageColors;
-import net.minecraft.world.IBlockDisplayReader;
-import net.minecraft.world.biome.BiomeColors;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +33,7 @@ public class ClientEventHandler
         event.getItemColors().register(new ItemColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get().asItem());
     }
 
-    public static class ItemColorRainbowLeaves implements IItemColor
+    public static class ItemColorRainbowLeaves implements ItemColor
     {
         @Override
         public int getColor(@Nonnull ItemStack stack, int tintIndex)
@@ -46,7 +46,7 @@ public class ClientEventHandler
             {
                 for (int j = -1; j <= 1; ++j)
                 {
-                    int averageColor = FoliageColors.getDefaultColor();
+                    int averageColor = FoliageColor.getDefaultColor();
                     red += (averageColor & 16711680) >> 16;
                     green += (averageColor & 65280) >> 8;
                     blue += averageColor & 255;
@@ -78,10 +78,10 @@ public class ClientEventHandler
         }
     }
 
-    public static class BlockColorRainbowLeaves implements IBlockColor
+    public static class BlockColorRainbowLeaves implements BlockColor
     {
         @Override
-        public int getColor(@Nonnull BlockState state, @Nullable IBlockDisplayReader worldIn, @Nullable BlockPos pos, int tintindex)
+        public int getColor(@Nonnull BlockState state, @Nullable BlockAndTintGetter worldIn, @Nullable BlockPos pos, int tintindex)
         {
             if (worldIn != null && pos != null)
             {
@@ -123,7 +123,7 @@ public class ClientEventHandler
 
                 return red << 16 | blue << 8 | green;
             }
-            else return FoliageColors.getDefaultColor();
+            else return FoliageColor.getDefaultColor();
         }
 
     }
