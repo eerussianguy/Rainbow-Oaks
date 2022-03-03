@@ -1,6 +1,5 @@
 package com.eerussianguy.rainbowoaks;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -23,7 +22,7 @@ public class CommonConfig
 
         rarity = builder.apply("rarity").comment("Rarity of a rainbow tree patch in 1/N chunks").worldRestart().defineInRange("rarity", 1, 1, Integer.MAX_VALUE);
         extraAttempts = builder.apply("extraAttempts").comment("Extra trees that spawn in a patch").worldRestart().defineInRange("extraAttempts", 2, 0, Integer.MAX_VALUE);
-        biomes = builder.apply("biomes").comment("Resource Locations of biomes they spawn in. Separate with commas.").worldRestart().defineList("biomes", () -> Arrays.asList("minecraft:flower_forest"), o -> o instanceof String);
+        biomes = builder.apply("biomes").comment("Resource Locations of biomes they spawn in. Separate with commas.").worldRestart().defineList("biomes", () -> List.of("minecraft:flower_forest"), o -> o instanceof String);
 
         innerBuilder.pop();
     }

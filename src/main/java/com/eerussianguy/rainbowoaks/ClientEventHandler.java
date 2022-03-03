@@ -3,6 +3,8 @@ package com.eerussianguy.rainbowoaks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
@@ -13,22 +15,35 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.eerussianguy.rainbowoaks.RainbowOaks.MOD_ID;
 
-@Mod.EventBusSubscriber(value=Dist.CLIENT, modid=MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class ClientEventHandler
 {
-    @SubscribeEvent
-    public static void onBlockColors(ColorHandlerEvent.Block event)
+    public static void init()
+    {
+        final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(ClientEventHandler::clientSetup);
+        bus.addListener(ClientEventHandler::onBlockColors);
+        bus.addListener(ClientEventHandler::onItemColors);
+    }
+
+    private static void clientSetup(final FMLClientSetupEvent event)
+    {
+        ItemBlockRenderTypes.setRenderLayer(RORegistry.RAINBOW_SAPLING.get(), RenderType.cutout());
+    }
+
+    private static void onBlockColors(ColorHandlerEvent.Block event)
     {
         event.getBlockColors().register(new BlockColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get());
     }
 
-    @SubscribeEvent
-    public static void onItemColors(ColorHandlerEvent.Item event)
+    private static void onItemColors(ColorHandlerEvent.Item event)
     {
         event.getItemColors().register(new ItemColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get().asItem());
     }

@@ -11,9 +11,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import static com.eerussianguy.rainbowoaks.RainbowOaks.MOD_ID;
 
