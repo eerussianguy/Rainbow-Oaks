@@ -15,7 +15,7 @@ public class RainbowTree extends AbstractTreeGrower
     @Override
     protected Holder<ConfiguredFeature<TreeConfiguration, ?>> getConfiguredFeature(@Nullable Random rand, boolean flowers)
     {
-        if (rand == null) return ROConfiguredFeatures.RAINBOW_OAK;
-        return rand.nextInt(10) == 0 ? ROConfiguredFeatures.FANCY_RAINBOW_OAK : ROConfiguredFeatures.RAINBOW_OAK;
+        if (rand == null) return ROConfiguredFeatures.RAINBOW_OAK.get();
+        return rand.nextInt(10) == 0 ? ROConfiguredFeatures.FANCY_RAINBOW_OAK.get() : ROConfiguredFeatures.RAINBOW_OAK.get();
     }
 }

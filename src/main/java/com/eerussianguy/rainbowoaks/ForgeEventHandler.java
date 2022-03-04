@@ -25,7 +25,7 @@ public class ForgeEventHandler
             {
                 if (event.getName().compareNamespaced(res) == 0)
                 {
-                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(ROPlacements.RAINBOW_TREES_CHECKED);
+                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(ROPlacements.RAINBOW_TREES_CHECKED.get());
                 }
             }
         }

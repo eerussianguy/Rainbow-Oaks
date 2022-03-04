@@ -9,23 +9,25 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
+import net.minecraftforge.common.util.Lazy;
+
 import static com.eerussianguy.rainbowoaks.RainbowOaks.MOD_ID;
 
 public class ROPlacements
 {
-    public static Holder<PlacedFeature> RAINBOW_OAK_CHECKED;
-    public static Holder<PlacedFeature> FANCY_RAINBOW_OAK_CHECKED;
-    public static Holder<PlacedFeature> RAINBOW_TREES_CHECKED;
+    public static final Lazy<Holder<PlacedFeature>> RAINBOW_OAK_CHECKED = Lazy.of(() -> register("rainbow_oak_checked", ROConfiguredFeatures.RAINBOW_OAK.get(), PlacementUtils.filteredByBlockSurvival(RORegistry.RAINBOW_SAPLING.get())));
+    public static final Lazy<Holder<PlacedFeature>> FANCY_RAINBOW_OAK_CHECKED = Lazy.of(() -> register("fancy_rainbow_oak_checked", ROConfiguredFeatures.FANCY_RAINBOW_OAK.get(), PlacementUtils.filteredByBlockSurvival(RORegistry.RAINBOW_SAPLING.get())));
+    public static final Lazy<Holder<PlacedFeature>> RAINBOW_TREES_CHECKED = Lazy.of(() -> register("rainbow_trees_checked", ROConfiguredFeatures.RAINBOW_TREES.get(), treePlacement(PlacementUtils.countExtra(ROConfig.COMMON.extraAttempts.get(), 0.1F, 1))));
 
     public static void init()
     {
-        RAINBOW_OAK_CHECKED = register("rainbow_oak_checked", ROConfiguredFeatures.RAINBOW_OAK, PlacementUtils.filteredByBlockSurvival(RORegistry.RAINBOW_SAPLING.get()));
-        FANCY_RAINBOW_OAK_CHECKED = register("fancy_rainbow_oak_checked", ROConfiguredFeatures.FANCY_RAINBOW_OAK, PlacementUtils.filteredByBlockSurvival(RORegistry.RAINBOW_SAPLING.get()));
+        RAINBOW_OAK_CHECKED.get();
+        FANCY_RAINBOW_OAK_CHECKED.get();
     }
 
     public static void init2()
     {
-        RAINBOW_TREES_CHECKED = register("rainbow_trees_checked", ROConfiguredFeatures.RAINBOW_TREES, treePlacement(PlacementUtils.countExtra(ROConfig.COMMON.extraAttempts.get(), 0.1F, 1)));
+        RAINBOW_TREES_CHECKED.get();
     }
 
     private static ImmutableList<PlacementModifier> treePlacement(PlacementModifier modifier)

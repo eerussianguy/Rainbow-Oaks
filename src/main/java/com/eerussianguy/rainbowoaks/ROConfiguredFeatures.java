@@ -23,29 +23,30 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraftforge.common.util.Lazy;
 
 public class ROConfiguredFeatures
 {
-    public static Holder<ConfiguredFeature<TreeConfiguration, ?>> RAINBOW_OAK;
-    public static Holder<ConfiguredFeature<TreeConfiguration, ?>> FANCY_RAINBOW_OAK;
-    public static Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> RAINBOW_TREES;
+    public static final Lazy<Holder<ConfiguredFeature<TreeConfiguration, ?>>> RAINBOW_OAK = Lazy.of(() -> register("rainbow_oak", Feature.TREE, createOak().build()));
+    public static final Lazy<Holder<ConfiguredFeature<TreeConfiguration, ?>>> FANCY_RAINBOW_OAK = Lazy.of(() -> register("fancy_rainbow_oak", Feature.TREE, createFancyOak().build()));
+    public static final Lazy<Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>>> RAINBOW_TREES = Lazy.of(() -> register("rainbow_trees", Feature.RANDOM_SELECTOR,
+        new RandomFeatureConfiguration(List.of(
+            new WeightedPlacedFeature(ROPlacements.RAINBOW_OAK_CHECKED.get(), 0.2F),
+            new WeightedPlacedFeature(ROPlacements.FANCY_RAINBOW_OAK_CHECKED.get(), 0.1F)
+        ),
+            TreePlacements.OAK_BEES_002
+        )
+    ));
 
     public static void init()
     {
-        RAINBOW_OAK = register("rainbow_oak", Feature.TREE, createOak().build());
-        FANCY_RAINBOW_OAK = register("fancy_rainbow_oak", Feature.TREE, createFancyOak().build());
+        RAINBOW_OAK.get();
+        FANCY_RAINBOW_OAK.get();
     }
 
     public static void init2()
     {
-        RAINBOW_TREES = register("rainbow_trees", Feature.RANDOM_SELECTOR,
-            new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(ROPlacements.RAINBOW_OAK_CHECKED, 0.2F),
-                new WeightedPlacedFeature(ROPlacements.FANCY_RAINBOW_OAK_CHECKED, 0.1F)
-            ),
-                TreePlacements.OAK_BEES_002
-            )
-        );
+        RAINBOW_TREES.get();
     }
 
     private static TreeConfiguration.TreeConfigurationBuilder createFancyOak()
