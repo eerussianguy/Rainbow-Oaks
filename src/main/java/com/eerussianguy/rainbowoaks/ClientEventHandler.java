@@ -1,8 +1,5 @@
 package com.eerussianguy.rainbowoaks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,15 +10,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import static com.eerussianguy.rainbowoaks.RainbowOaks.MOD_ID;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ClientEventHandler
 {
@@ -35,23 +29,24 @@ public class ClientEventHandler
 
     private static void clientSetup(final FMLClientSetupEvent event)
     {
+        // todo: json this...
         ItemBlockRenderTypes.setRenderLayer(RORegistry.RAINBOW_SAPLING.get(), RenderType.cutout());
     }
 
-    private static void onBlockColors(ColorHandlerEvent.Block event)
+    private static void onBlockColors(RegisterColorHandlersEvent.Block event)
     {
-        event.getBlockColors().register(new BlockColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get());
+        event.register(new BlockColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get());
     }
 
-    private static void onItemColors(ColorHandlerEvent.Item event)
+    private static void onItemColors(RegisterColorHandlersEvent.Item event)
     {
-        event.getItemColors().register(new ItemColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get().asItem());
+        event.register(new ItemColorRainbowLeaves(), RORegistry.RAINBOW_LEAVES.get().asItem());
     }
 
     public static class ItemColorRainbowLeaves implements ItemColor
     {
         @Override
-        public int getColor(@Nonnull ItemStack stack, int tintIndex)
+        public int getColor(@NotNull ItemStack stack, int tintIndex)
         {
             int red = 0;
             int green = 0;
@@ -96,7 +91,7 @@ public class ClientEventHandler
     public static class BlockColorRainbowLeaves implements BlockColor
     {
         @Override
-        public int getColor(@Nonnull BlockState state, @Nullable BlockAndTintGetter worldIn, @Nullable BlockPos pos, int tintindex)
+        public int getColor(@NotNull BlockState state, @Nullable BlockAndTintGetter worldIn, @Nullable BlockPos pos, int tintindex)
         {
             if (worldIn != null && pos != null)
             {

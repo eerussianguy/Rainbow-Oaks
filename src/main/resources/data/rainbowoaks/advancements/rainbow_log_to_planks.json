@@ -7,7 +7,9 @@
       "conditions": {
         "items": [
           {
-            "item": "rainbowoaks:rainbow_log"
+            "items": [
+              "rainbowoaks:rainbow_log"
+            ]
           }
         ]
       }

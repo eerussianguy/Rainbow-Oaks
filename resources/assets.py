@@ -28,9 +28,8 @@ def generate(rm: ResourceManager):
     rm.item_model('rainbow_leaves', parent='minecraft:item/oak_leaves', no_textures=True)
 
     rm.crafting_shapeless('rainbow_log_to_planks', 'rainbowoaks:rainbow_log', (4, 'minecraft:oak_planks')).with_advancement('rainbowoaks:rainbow_log')
-    rm.lang('rainbowoaks.config.server.rarity', 'Rarity of a rainbow tree patch in 1/N chunks')
-    rm.lang('rainbowoaks.config.server.extraAttempts', 'Extra trees that spawn in a patch')
-    rm.lang('rainbowoaks.config.server.rarity', 'Resource Locations of biomes they spawn in. Separate with commas.')
+
+    rm.tag('spawns_rainbow_oaks', 'worldgen/placed_feature', 'minecraft:flower_forest')
 
 
 def lang(key: str, *args) -> str:

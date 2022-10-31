@@ -9,11 +9,11 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = '3.0'
+version = '4.0'
 group = 'com.eerussianguy.rainbowoaks' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'rainbowoaks'
 
@@ -21,16 +21,14 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: '1.19.2'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -52,18 +50,6 @@ minecraft {
             }
         }
 
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'rainbowoaks', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                rainbowoaks {
-                    source sourceSets.main
-                }
-            }
-        }
     }
 }
 
@@ -71,7 +57,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.2'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.1.47'
 
 }
 

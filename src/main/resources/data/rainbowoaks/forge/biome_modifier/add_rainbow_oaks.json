@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#rainbowoaks:spawns_rainbow_oaks",
+  "features": "rainbowoaks:rainbow_trees",
+  "step": "vegetal_decoration"
+}
